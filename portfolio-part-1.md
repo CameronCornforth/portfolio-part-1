@@ -1,0 +1,132 @@
+# portfolio-part-1
+Cameron Cornforth
+
+# Data Description
+
+## Data Source:
+
+> The data I collected is coming form the most recent TidyTuesday
+> repository. Its a collection of seabird data from 1969 to 1990, and it
+> includes four different datasets. One for the observations of birds by
+> species, one for the ship details/traveling conditions of the recor
+> ID, one for sea states, and one for beaufort scales.
+
+## Data Variables/Types:
+
+> The birds dataset includes the record ID (numeric), bird name and
+> scientific name as string variables, bird count (numeric), and
+> bahaviors (following ship, sitting on water, feeding) as boolean
+> (TRUE/FALSE) values. The ships data set includes corresponding
+> information on the record ID (numeric), date, time,
+> latitude/longitude, activity, atmospheric/barometric measurements,
+> season, and observer. The sea states data set includes the sea state
+> class (corresponding to the ships data set) sea state verbal
+> description, (discrete), wave meters min and waves meter max. The
+> beaufort scale data set includes the wind speed class correpsonding to
+> the ships data set (discrete), wind speed verbal description, and the
+> wind speed knots min/max.
+
+## Research Questions:
+
+> What season are all seabirds most and least frequently observed in the
+> Eastern hemisphere?
+
+> What is the most and least frequently observed species of seabird? Did
+> it changed over the period from 1969 to 1990?
+
+> What sea conditions are seabirds most frequently spotted (beafort and
+> sea state)?
+
+------------------------------------------------------------------------
+
+# Data Visualization
+
+> For my first research question, I want to create a quadrant of 4 or
+> bubble plots, which each quadrant representing a season. Each bubble
+> would represent a different species, with the size representing the
+> total count of that species for that season. The only problem would be
+> mapping the x and y coordiantes, but I’ll figure that out once I start
+> creating the visualization. I would need to join the ship data to add
+> the season for each record ID.
+
+> For my second research question, I could create a treemap, with the
+> area of each subrectangle representing the count/proportion of an
+> individual seabird species. Additionally, I could create a new
+> variables for the genus or family of seabird and furhter categorize
+> the treemap into family, species. This would require me to create a
+> new category for family with certain species in each family group. To
+> answer change over time, I could create two treemaps, one for 1969 and
+> 1990 using the dates from the ships data set, and then make
+> comparisons between them. This would indicate differences in
+> individual species and family sightings over at the beginning and at
+> the end of the 20-year span of the data.
+
+> For my third research question, I want to create a bar chart for the
+> count of seabirds given either the beaufort scale or sea state. To do
+> this, I would need ot joing either the beaufort data set or the sea
+> state data set to the birds data set. Then, I could map x to sea
+> state/beaufort condition and y to seabird count.
+
+------------------------------------------------------------------------
+
+# Data Cleaning
+
+Do you need to reformat any variables into different types
+(e.g. factors, time, dates, strings)? Or remove information from
+variable values?
+
+> I will most likely need to reformat the date/time variables to be able
+> to work with them for the second research question. I may also need to
+> specify data types for beaufort scales/sea states because they may be
+> classified as integer data, when they relaly should be treated more
+> like categories.
+
+Do you need to deal with any missing data, especially missing data coded
+other than NA?
+
+> There are many NA values for both the birds and ships data sets, and
+> removing all NAs would greatly reduce the amount of data I can work
+> with, so filtering the data sets to only the variables I need will
+> help in determining how dropping the NAs for one column will effect
+> the size of the data.
+
+Do you need to filter your data? How?
+
+> If I’m not using bird behavior or ship trip details, I could probably
+> filter out nearly half of the columns for each data set to reduce size
+> and save space. Additionally, I can filter further down when I’m
+> creating the visualizations to only include the variables I need.
+
+Do you need to create any new variables? What variables? How?
+
+> I may need to create a new variable for bird family for the second
+> visualization. To this, I will need to create a new variable with
+> individual bird species manually classified into each family.
+
+Do you need to add new data (join) to your data? What data? How?
+
+> I will definitely need to to join the ships data set and either the
+> beaufort or sea states data set to the birds data set for first and
+> third research questions respectively. If I do change over time, I
+> will need to join the ships data set for the second data set to the
+> birds data set for the second research question.
+
+Do you need pivot your data in any way? Why? How?
+
+> I don’t think I will need to pivot the data at the moment. The may
+> change after I create the family variable for the second research
+> question.
+
+Do you need to summarize any of the variables? Which ones? How?
+
+> I will need to use summarize for the bird species count for the first
+> and second research questions, and the total bird count for the third
+> research question.
+
+What other aspects of your data need to be “fixed” in order to make your
+data visualizations?
+
+> I think just dropping NA values, filtering unneeded data so RStudio
+> runs better while creating/rendering the visualizations, and
+> sepcifying datatypes will make sure that the process of making the
+> actual visualizations goes smoothly.
