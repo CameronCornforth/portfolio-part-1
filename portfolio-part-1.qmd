@@ -4,6 +4,7 @@ format: gfm
 author: "Cameron Cornforth"
 execute: 
   code-tools: true
+  warning: false
 ---
 
 
@@ -29,11 +30,11 @@ execute:
 
 # Data Visualization
 
-> For my first research question, I want to create a quadrant of 4 or bubble plots, which each quadrant representing a season. Each bubble would represent a different species, with the size representing the total count of that species for that season. The only problem would be mapping the x and y coordiantes, but I'll figure that out once I start creating the visualization. I would need to join the ship data to add the season for each record ID.   
+> For my first research question, I want to create a quadrant of 4 bubble plots, with each quadrant representing a season. Each bubble would represent a different species, with the size representing the total count of that species for that season. The only problem would be mapping the x and y coordiantes, but I'll figure that out once I start creating the visualization. I would need to join the ship data to add the season for each record ID.   
 
-> For my second research question, I could create a treemap, with the area of each subrectangle representing the count/proportion of an individual seabird species. Additionally, I could create a new variables for the genus or family of seabird and furhter categorize the treemap into family, species. This would require me to create a new category for family with certain species in each family group. To answer change over time, I could create two treemaps, one for 1969 and 1990 using the dates from the ships data set, and then make comparisons between them. This would indicate differences in individual species and family sightings over at the beginning and at the end of the 20-year span of the data.  
+> For my second research question, I could create a treemap, with the area of each subrectangle representing the count/proportion of an individual seabird species. Additionally, I could create new variables for the genus or family of seabird and further categorize the treemap into family, species. This would require me to create a new category for family with certain species in each family group. To answer change over time, I could create two treemaps, one for 1969 and 1990 using the dates from the ships data set, and then make comparisons between them. This would indicate differences in individual species and family sightings over at the beginning and at the end of the 20-year span of the data.  
 
-> For my third research question, I want to create a bar chart for the count of seabirds given either the beaufort scale or sea state. To do this, I would need ot joing either the beaufort data set or the sea state data set to the birds data set. Then, I could map x to sea state/beaufort condition and y to seabird count.  
+> For my third research question, I want to create a bar chart for the count of seabirds given either the beaufort scale or sea state. To do this, I would need to join either the beaufort data set or the sea state data set to the birds data set. Then, I could map x to sea state/beaufort condition and y to seabird count.  
 
 ***
 
@@ -57,7 +58,7 @@ Do you need to create any new variables? What variables? How?
 
 Do you need to add new data (join) to your data? What data? How?
 
-> I will definitely need to to join the ships data set and either the beaufort or sea states data set to the birds data set for first and third research questions respectively. If I do change over time, I will need to join the ships data set for the second data set to the birds data set for the second research question. 
+> I will definitely need to to join the ships data set and either the beaufort or sea states data set to the birds data set for the first and third research questions respectively. If I do change over time, I will need to join the ships data set for the second data set to the birds data set for the second research question. 
 
 Do you need pivot your data in any way? Why? How?
 
@@ -69,6 +70,36 @@ Do you need to summarize any of the variables? Which ones? How?
 
 What other aspects of your data need to be “fixed” in order to make your data visualizations?
 
-> I think just dropping NA values, filtering unneeded data so RStudio runs better while creating/rendering the visualizations, and sepcifying datatypes will make sure that the process of making the actual visualizations goes smoothly.  
+> I think just dropping NA values, filtering unneeded data so RStudio runs better while creating/rendering the visualizations, and sepecifying datatypes will make sure that the process of making the actual visualizations goes smoothly.  
 
+```{r}
+#| label: setup
+#| include: false
+
+library(ggplot2)
+library(tidyverse)
+
+```
+
+```{r}
+#| label: read-data
+
+bird_count <- read_csv("birds.csv")|>
+  select(bird_observation_id, record_id, species_common_name, species_scientific_name, count)
+
+ships <- read_csv("ships.csv")
+
+```
+
+
+```{r}
+#| label: cleaning-birds
+
+bird_count <- bird_count|>
+  mutate(species_common_name = as.factor(species_common_name))|>
+  left_join(ships, by = "record_id")
+  
+bird_count
+
+```
 
